@@ -1,0 +1,29 @@
+<% if @past_investigations.empty? %>
+    <div class="card">
+      <div class="card-content">
+          <h5>No closed investigations</h5>
+      </div>
+    </div>
+<% else%>
+
+  <div class="card grey lighten-3">
+    <div class="card-content">
+      <span class="card-title">Past Investigations</span>
+      <table class="lined">
+        <thead>
+          <th>Title</th>
+          <th>Close Date</th>
+        </thead>
+          <% for assignment in @past_investigations %>
+            <tr>
+              <td>&nbsp;<%= link_to assignment.title, investigation_path(assignment) %></td>
+              <td>
+                <%= assignment.date_closed.strftime("%m/%d/%y") %>
+              </td>
+              
+            </tr>
+          <% end %>
+      </table>
+    </div>
+  </div>
+<% end%>

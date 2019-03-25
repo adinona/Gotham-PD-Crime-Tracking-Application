@@ -1,0 +1,18 @@
+<div id="tabbed">
+  <tabs>
+
+    <tab name="Open Investigations" v-bind:selected="true">
+     <%= render :partial =>"investigation_list", locals: {investigations: @open_investigations, state: 'open'} %>
+    </tab>
+
+    <tab name="Closed Investigations">
+       <%= render :partial =>  "investigation_list", locals: {investigations: @closed_investigations, state: 'closed'}%>
+    </tab>
+
+  </tabs>
+</div>
+
+<p>&nbsp;</p>
+<%= render :partial => "partials/add_new_object", locals: {model_name: 'investigation'} %>
+
+

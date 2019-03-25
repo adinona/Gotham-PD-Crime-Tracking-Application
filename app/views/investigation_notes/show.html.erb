@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-content">
+    <h5>Investigation Note Information for <%= @investigationNote.investigation.title %></h5><br />
+
+    <b>Content:&nbsp;&nbsp;</b>
+      
+      <%= @investigationNote.content %><br /><br />
+  </div>
+</div>
+
+
+<div class="form-actions">
+  <% if can? :index, InvestigationNote %>
+    <%= link_to(eval("investigation_note_path"), class: 'waves-effect waves-light btn') do %>
+      &nbsp;Display All 
+    <% end %>
+    &nbsp;&nbsp;
+  <% end %>
+
+  <% if can? :edit, @investigationNote %>
+    <%= link_to(eval("edit_investigation_note_path(@investigationNote)"), class: 'waves-effect waves-light btn') do %>
+        &nbsp;<%= "Edit" %>
+    <% end %>
+    &nbsp;&nbsp;
+  <% end %>
+  
+  <% if can?(:destroy, @investigationNote) && controller.respond_to?(:destroy) %>
+    <%= link_to(eval("investigation_note_path(@investigationNote)"), method: 'delete', data: {confirm: "Are you sure you want to permanently delete"}, class: 'waves-effect waves-light btn btn-alert') do %>
+        &nbsp;<%= "Delete " %>
+    <% end %>
+  <% end %>
+ 
+</div>

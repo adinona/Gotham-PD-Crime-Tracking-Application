@@ -1,0 +1,8 @@
+ <% if current_user.role? :commish %>
+<%= render :partial =>"comish_dashboard" %>
+ <% elsif current_user.role? :chief %>
+<%= render :partial =>"chief_dashboard" %>
+<% elsif current_user.role? :officer %>
+<%= render :partial =>"officer_dash" %>
+
+<% end %>

@@ -1,0 +1,47 @@
+<h4><%= state.capitalize %> Units in GCPD</h4>
+
+<% if units.empty? %>
+  <p>There are no <%= state.downcase %> units at this time.</p>
+<% else %>
+
+  <table class="striped highlight">
+    <thead>
+      <th>Unit</th>
+      <th>Active</th>
+      <th>Number of Active Officers</th>
+       <th>Number of Current Investigations</th>
+
+      <% if can? :update, Unit %>
+      <th class="align_center">Edit</th>
+      <% end %>
+
+    </thead>
+    <% for unit in units %>
+      <tr>
+        <!-- <td><%# best_in_place unit, :name, as: :input %></td> -->
+      <% if can? :show, Unit %>
+
+        <td><%= link_to unit.name, unit_path(unit) %></td>
+      <% else %>  
+        <td><%= unit.name%></td>
+        <% end %>
+        <td><%= best_in_place unit, :active, as: :checkbox, collection: ["No", "Yes"]  %></td>
+        <td><%= unit.number_of_active_officers%></td>
+        <td><%= unit.number_of_unique_open_investigations%></td>
+
+      <% if can? :update, Unit %>
+
+      <td class="align_center">
+        <%= link_to edit_unit_path(unit) do %>
+          <i class="material-icons">edit</i>
+        <% end %>
+      </td>
+      <% end %>
+ 
+      </tr>
+    <% end %>
+  </table>
+  <p class="supertiny"></p>
+  <br />
+  <%= will_paginate units, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<% end %>

@@ -1,0 +1,19 @@
+
+<div id="tabbed">
+  <tabs>
+
+    <tab name="General" v-bind:selected="true">
+      <%= render :partial =>"general"  %>
+    </tab>
+
+    <tab name="Units">
+      <%= render :partial =>  "units" %>
+    </tab>
+      <tab name="Officers">
+      <%= render :partial =>  "officers"%>
+    </tab>
+
+  </tabs>
+</div>
+
+<p>&nbsp;</p>

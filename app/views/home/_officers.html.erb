@@ -1,0 +1,37 @@
+<div class = 'row'>
+  <div class="col s8">
+
+    <div class="card" >
+      <div class="card-content">
+        <span class="card-title">Officers</span>
+        <table class="lined">
+          <thead>
+            <th>Name</th>
+            <th>Number of Cases solved</th>
+
+          </thead>
+
+            <% for officer in @tofficer %>
+              <tr>
+                <td><%= officer.name %></td>
+
+                 <% if officer.investigations.count == 0 %>
+                  <td>0</td>
+                <% else %>
+                  <td><%= officer.investigations.was_solved.count%></td>
+                <% end %>
+
+              </tr>
+          <% end %>
+    </table>
+    <p class="supertiny"></p>
+  <br />
+      <%= will_paginate @tofficer, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  

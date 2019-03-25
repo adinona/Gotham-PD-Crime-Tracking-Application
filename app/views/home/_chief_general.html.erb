@@ -1,0 +1,142 @@
+
+<div class = 'row'>
+  <div class="col s8">
+
+    <div class="card">
+      <div class="card-content">
+        <h5>Officer Information for <%= @officer.proper_name %></h5><br />
+
+        <b>Current Unit:&nbsp;&nbsp;</b>
+          <%= link_to @officer.unit.name, unit_path(@officer.unit) %>
+          <% if @officer.user.role?(:chief) %>
+            &nbsp;&nbsp;<i>*Unit Chief</i>
+          <% end%>     
+          <br /><br />
+
+        <b>Current Rank:&nbsp;&nbsp;</b>
+          <%= @officer.rank %><br /><br />
+
+        <b>Username:&nbsp;&nbsp;</b>
+          <%= @officer.user.username %><br /><br />
+
+        <b>Active with GCPD?&nbsp;&nbsp;</b>
+          <%= @officer.active ? "Yes" : "No" %><br><br><br>
+      </div>
+      <div class="form-actions">
+  <% if can? :edit, @officer.user %>
+    <%= link_to(eval("edit_user_path(@officer.user)"), class: 'waves-effect waves-light btn') do %>
+        &nbsp;<%= "Edit User Info" %>
+    <% end %>
+    &nbsp;&nbsp;
+  <% end %>
+</div>
+    </div>
+  </div>
+
+<div class="col s4">
+<% unless @curr_assign.empty? %>
+
+    <div class="card" >
+      <div class="card-content">
+        <span class="card-title">Current Assignments</span>
+        <table class="lined">
+          <thead>
+            <th>Case</th>
+            <th>Starting</th>
+          </thead>
+            <% for assignment in @curr_assign %>
+              <tr>
+                <td>
+                  <% if can? :terminate, Assignment %>
+                    <%= link_to(terminate_assignment_path(assignment, from: "officer"), class: 'remove', method: :patch) do %>
+                      x&nbsp;&nbsp;
+                    <% end %>
+                  <% end %>
+                  &nbsp;<%= link_to assignment.investigation.title, investigation_path(assignment.investigation) %>
+                </td>
+                <td><%= assignment.start_date.strftime("%m/%d/%y") %></td>
+              </tr>
+            <% end %>
+        </table>
+        
+      </div>
+    </div>
+    <% else%>
+  
+
+    <% end%>
+
+<% unless @prev_assign.empty? %>
+
+  <div class="card" >
+        <div class="card-content">
+          <span class="card-title">Previous Assignments</span>
+          <table class="lined">
+            <thead>
+              <th>Case</th>
+              <th>Starting</th>
+            </thead>
+              <% for assignment in @prev_assign %>
+                <tr>
+                  <td>
+                    &nbsp;<%= link_to assignment.investigation.title, investigation_path(assignment.investigation) %>
+                  </td>
+                  <td><%= assignment.start_date.strftime("%m/%d/%y") %></td>
+                </tr>
+              <% end %>
+          </table>
+          
+        </div>
+      </div>
+     <% else%>
+
+
+    <% end%>
+    
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col s8">
+
+    <div class="card">
+      <div class="card-content">
+
+        <h5>General Info</h5><br />
+
+          <b>Active Officers in unit:&nbsp;&nbsp;</b>
+          <%= @o_in_unit %>
+          <br /><br>
+
+          <b>Open Investigations:&nbsp;&nbsp;</b>
+          <%= @uniq_invest %>
+          <br /><br />
+
+          <b>Total Investigations Solved:&nbsp;&nbsp;</b>
+          <%= @total_solved_by_unit %>
+          <br /><br />
+
+      </div>
+    </div>
+  </div>
+<div class="col s4">
+
+    <div class="card" >
+      <div class="card-content">
+        <span class="card-title">Quick Links</span>
+        <table class="lined">
+          <thead>
+            <th>Link</th>
+          </thead>
+              <tr>
+                <td><%=link_to "New Investigation",new_investigation_path %></td>
+              </tr>
+            <tr><td><%=link_to "New Criminal",new_criminal_path %></td></td></tr>
+
+
+        </table>
+        
+      </div>
+    </div>
+  </div>
+</div>

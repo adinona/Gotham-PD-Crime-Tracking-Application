@@ -1,0 +1,68 @@
+<% unless @current_assignments.empty? %>
+    <div class="card">
+    <div class="card-content">
+      <span class="card-title">Current Assignments</span>
+      <table class="lined">
+        <thead>
+          <th>Officer</th>
+          <th>Starting</th>
+        </thead>
+          <% for assignment in @current_assignments %>
+          <script>console.log("test")</script>
+            <tr>
+            <td>
+                <% if can? :terminate, Assignment %>
+                  <%= link_to(terminate_assignment_path(assignment, from: "investigation"), class: 'remove', method: :patch) do %>
+                    x&nbsp;&nbsp;
+                  <% end %>
+                <% end %>
+                &nbsp;<%= link_to assignment.officer.name, officer_path(assignment.officer) %>
+              </td>
+           
+              <td><%= assignment.start_date.strftime("%m/%d/%y") %></td>
+            </tr>
+          <% end %>
+      </table>
+    </div>
+  </div>
+
+<% else%>
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">No Current Assignments</span>
+    </div>
+  </div>
+<% end%>
+
+
+<% unless @previous_assignments.empty? %>
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Previous Assignments</span>
+      <table class="lined">
+        <thead>
+          <th>Officer</th>
+          <th>Starting</th>
+        </thead>
+          <% for assignment in @previous_assignments %>
+            <tr>
+              <td>
+                &nbsp;<%= link_to assignment.officer.name, officer_path(assignment.officer) %>
+              </td>
+              <td><%= assignment.start_date.strftime("%m/%d/%y") %></td>
+            </tr>
+          <% end %>
+      </table>
+    </div>
+  </div>
+<% else%>
+
+<% end%>
+<% if can? :new, Assignment %>
+    <div class="card grey lighten-3">
+      <div class="card-action">
+        <%= link_to "Add a new assignment", new_assignment_path(investigation_id: @investigation.id) %>
+      </div>
+    </div>
+<% end%>
+

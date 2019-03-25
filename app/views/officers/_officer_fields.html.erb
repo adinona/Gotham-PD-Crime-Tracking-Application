@@ -1,0 +1,6 @@
+<%= f.input :first_name, label_html: { class: 'active' } %>
+<%= f.input :last_name, label_html: { class: 'active' } %>
+<%= f.input :rank, collection: Officer::RANKS_LIST%>
+<%= f.input :unit_id, collection: Unit.alphabetical.to_a, include_blank: true %>
+<%= f.input :ssn, label_html: { class: 'active' } %>
+<%= f.input :active %>

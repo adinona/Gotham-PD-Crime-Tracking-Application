@@ -1,0 +1,16 @@
+<nav id="nav">
+  <div class="container">
+
+    <% if can? :index, Crime %>
+     <ul class="left hide-on-med-and-down">
+      	<li><%= link_to 'Crimes', crimes_path %></li>
+     </ul>
+    <% end %>
+
+
+
+    <ul class="right">
+      <li><%= link_to 'Login', login_path %></li>
+    </ul>
+  </div>
+</nav>

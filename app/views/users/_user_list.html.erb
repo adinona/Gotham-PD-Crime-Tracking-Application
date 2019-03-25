@@ -1,0 +1,32 @@
+<h4>Users in GCPD</h4>
+
+<table class="striped highlight">
+  <thead>
+    <th>Username</th>
+    <th class="align_center">Role</th>
+    <th class="align_center">Options</th>
+  </thead>
+  <% for user in @user %>
+    <tr class="<%= cycle('dg_list_line_odd', 'dg_list_line_even') %>">
+      <% if can? :read, user %>
+            <td><%= link_to user.username, user_path(user) %></td>
+      <% else %>
+            <td><%= user.username %></td>
+      <% end %>
+      <td class="align_center"><%= user.role %></td>
+      <td class="align_center">
+        <% if can? :edit, user %>
+          <%= link_to edit_user_path(user) do %>
+            <i class="material-icons">edit</i>
+          <% end %> 
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<p class="supertiny"></p>
+<br />
+<%= will_paginate @user, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<br />
+<%= render :partial => "partials/add_new_object", locals: {model_name: 'user'} %>

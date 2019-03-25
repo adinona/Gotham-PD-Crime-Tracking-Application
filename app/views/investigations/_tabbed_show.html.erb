@@ -1,0 +1,24 @@
+<div id="tabbed">
+  <tabss>
+
+    <tab name="General" v-bind:selected="true">
+      <%= render :partial =>"investigation_data"  %>
+    </tab>
+
+    <tab name="Units">
+      <%= render :partial =>  "assignment_list" %>
+    </tab>
+      <tab name="Suspects">
+      <%= render :partial =>  "suspect_list" %>
+    </tab>
+         <tab name="Investigation Notes">
+      <%= render :partial =>  "invest_notes"%>
+    </tab>     
+    <tab name="Crimes">
+      <%= render :partial =>  "crimes" %>
+    </tab>
+
+  </tabss>
+</div>
+
+<p>&nbsp;</p>
